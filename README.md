@@ -46,7 +46,7 @@ This dashboard helps researchers, agronomists, and data scientists explore soil 
 
 Watch the dashboard in action:
 
-![Demo Video](docs/demo.mp4)
+![Demo Video](vid4.mp4)
 
 ---
 
