@@ -42,6 +42,11 @@ This dashboard helps researchers, agronomists, and data scientists explore soil 
   - Evaluation metrics: R², RMSE
   - Residual plots
   - Export predictions as CSV
+  - ## 🎥 Demo
+
+Watch the dashboard in action:
+
+![Demo Video](docs/demo.mp4)
 
 ---
 
