@@ -1,61 +1,64 @@
-🌱 Soil Fertility Dashboard
-📖 Project Description
-This project delivers an interactive Streamlit dashboard for soil fertility evaluation.
-It integrates multiple soil datasets, applies feature engineering, and leverages machine learning models to generate insights that support soil health improvement and sustainability.
+# 🌱 Soil Fertility Dashboard
 
-The goal is to solve a real challenge: predicting soil fertility accurately to help Tunisian farmers make better decisions about crop management, fertilization, and sustainability practices.
+A Streamlit-based data science project for **soil fertility evaluation, feature engineering, clustering, and predictive modeling**.  
+This dashboard helps researchers, agronomists, and data scientists explore soil datasets, detect missing values, engineer fertility indices, visualize distributions, cluster profiles, and train predictive models.
 
-📊 Dataset Work
-Began with a small, incomplete horizon dataset that was insufficient for fertility prediction.
+---
 
-Integrated additional soil datasets through mapping and harmonization to build a unified, richer foundation.
+## 📊 Features
 
-Addressed missing values and inconsistencies to ensure reliability.
+- **Flexible Data Loading**
+  - Upload CSV/Excel files
+  - Connect to SQL databases
+  - Fetch data from APIs
 
-Engineered new features such as CN_ratio, Salinity_Index, and Fertility_Index to capture soil quality indicators.
+- **Missing Data Handling**
+  - Visualize missing values with heatmaps
+  - Apply imputation methods: Median, KNN, Random Forest
 
-This integration step was crucial to move from fragmented data to a national‑scale fertility evaluation resource.
+- **Feature Engineering**
+  - Compute CN ratio (Carbon/Nitrogen)
+  - Fertility Index (TOTC, TOTN, P2O5, PHAQ)
+  - Salinity Index (ELCO, GYPS)
+  - Depth-normalized carbon
+  - Horizon grouping
 
-⚙️ Preprocessing
-Applied data cleaning: imputation of missing values, normalization, and encoding of categorical variables.
+- **Exploratory Data Analysis (EDA)**
+  - Distribution plots
+  - Correlation heatmaps
+  - Outlier detection with Z-scores
 
-Conducted correlation analysis to identify the most relevant fertility drivers (carbon, nitrogen, phosphorus, pH).
+- **Ranking & Consistency**
+  - Top 10 fertile profiles
+  - Compare rule-based vs cluster-based rankings
 
-Reduced dimensionality by focusing on the most impactful features for modeling.
+- **Clustering & Insights**
+  - KMeans clustering with PCA visualization
+  - Cluster summaries and recommendations
 
-This ensured that the models were trained on meaningful, interpretable variables rather than noise.
+- **Model Training**
+  - Train/test split
+  - Models: Random Forest, Gradient Boosting, KNN, Linear Regression
+  - Evaluation metrics: R², RMSE
+  - Residual plots
+  - Export predictions as CSV
 
-🤖 Modeling
-Implemented multiple models:
+---
 
-Random Forest & Gradient Boosting → captured non‑linear relationships, achieved >93% variance explained.
+## ⚙️ Installation
 
-KNN → explored local similarity patterns, sensitive to outliers.
-
-Linear Regression → used as a transparent baseline.
-
-Hyperparameters tuned for balance between accuracy and generalization.
-
-Evaluation metrics: R², RMSE, and residual analysis confirmed unbiased, robust predictions.
-
-This modeling pipeline transformed raw soil data into actionable fertility predictions.
-
-📈 Analysis & Real‑World Impact
-Ensemble models provided the most accurate predictions.
-
-Feature importance highlighted carbon and nitrogen as key fertility drivers, with phosphorus showing a negative correlation.
-
-Clustering (K‑Means) segmented soils into fertility categories, complementing rule‑based classification.
-
-🌍 Application in Tunisia
-Farmers can use the dashboard to upload their soil test results and receive fertility predictions.
-
-The system provides recommendations on soil management, helping optimize fertilizer use and reduce costs.
-
-By identifying fertility drivers, the tool supports sustainable practices that improve soil health and reduce environmental impact.
-
-This bridges the gap between academic soil science and real agricultural decision‑making in Tunisia.
-
-🎯 Conclusion
-This project successfully transformed incomplete horizon data into a robust fertility prediction pipeline.
-It achieved the goal of delivering accurate predictions and actionable insights, supporting farmers in Tunisia to improve soil health, optimize resources, and move toward sustainable agriculture.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/rayen-feb/soil-fertility-dashboard.git
+cd soil-fertility-dashboard
+###  2. create a virtual envirenment
+python -m venv venv
+# Activate it:
+# On Linux/Mac:
+source venv/bin/activate
+# On Windows:
+venv\Scripts\activate
+### 3. install dependencies
+pip install -r requirements.txt
+### 3.run the dashboard
+streamlit run soil_dashboard.py
