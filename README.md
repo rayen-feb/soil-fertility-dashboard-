@@ -50,15 +50,22 @@ This dashboard helps researchers, agronomists, and data scientists explore soil 
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/rayen-feb/soil-fertility-dashboard.git
-cd soil-fertility-dashboard
+cd soil-fertility-dashboard 
+```
 ###  2. create a virtual envirenment
+```
 python -m venv venv
 # Activate it:
 # On Linux/Mac:
 source venv/bin/activate
 # On Windows:
 venv\Scripts\activate
+```
 ### 3. install dependencies
+```
 pip install -r requirements.txt
-### 3.run the dashboard
+```
+### 4.run the dashboard
+```
 streamlit run soil_dashboard.py
+```
