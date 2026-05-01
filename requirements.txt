@@ -3,6 +3,13 @@ pandas
 numpy
 seaborn
 matplotlib
+plotly
+kaleido
+fpdf2
+openpyxl
 scikit-learn
 missingno
 shap
+pillow
+requests
+sqlalchemy

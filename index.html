@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Intelligence Platform</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <!-- SheetJS for Excel parsing -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    
+    <!-- PapaParse for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <!-- simple-statistics -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simple-statistics/7.8.3/simple-statistics.min.js"></script>
+    
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-content">
+            <div class="nav-logo">
+                <span class="logo-icon">🌱</span>
+                <span>Soil Intelligence</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#overview" class="nav-link">Overview</a></li>
+                <li><a href="#explorer" class="nav-link">Data Explorer</a></li>
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#clustering" class="nav-link">Clustering</a></li>
+                <li><a href="#modeling" class="nav-link">Modeling</a></li>
+                <li><a href="#insights" class="nav-link">Insights</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero">
+        <div class="hero-gradient"></div>
+        <div class="particle" style="width: 300px; height: 300px; top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="particle" style="width: 200px; height: 200px; top: 60%; right: 15%; animation-delay: -5s;"></div>
+        <div class="particle" style="width: 150px; height: 150px; bottom: 20%; left: 30%; animation-delay: -10s;"></div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-sparkles"></i>
+                Advanced Analytics Platform
+            </div>
+            <h1 class="hero-title">
+                Soil Intelligence<br>Platform
+            </h1>
+            <p class="hero-subtitle">
+                Advanced analytics for soil fertility and agricultural optimization. 
+                Transform complex soil data into clear, actionable intelligence.
+            </p>
+            <div class="hero-buttons">
+                <a href="#upload" class="btn btn-primary">
+                    <i class="fas fa-search"></i>
+                    Explore Dataset
+                </a>
+                <a href="#modeling" class="btn btn-secondary">
+                    <i class="fas fa-bolt"></i>
+                    Run Analysis
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Upload Section -->
+    <section class="section" id="upload">
+        <div class="section-header">
+            <div class="section-label">Data Source</div>
+            <h2 class="section-title">Upload Your Soil Data</h2>
+            <p class="section-subtitle">Drag and drop your dataset or use the file picker below</p>
+        </div>
+        
+        <div class="upload-container">
+            <div class="upload-zone" id="uploadZone">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <h3>Drop your file here</h3>
+                <p>Supports CSV, Excel (.xlsx, .xls)</p>
+                <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" hidden>
+                <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                    Choose File
+                </button>
+            </div>
+            
+            <div class="upload-divider">
+                <span>or</span>
+            </div>
+            
+            <button class="btn btn-secondary" id="loadSampleBtn" style="width: 100%; max-width: 400px;">
+                <i class="fas fa-database"></i>
+                Load Sample Dataset
+            </button>
+        </div>
+        
+        <div id="uploadStatus" class="upload-status hidden"></div>
+    </section>
+
+    <!-- Overview Section -->
+    <section class="section" id="overview">
+        <div class="section-header">
+            <div class="section-label">Overview</div>
+            <h2 class="section-title">Dataset Overview</h2>
+            <p class="section-subtitle">Key metrics and statistics at a glance</p>
+        </div>
+        
+        <div class="kpi-grid" id="kpiGrid">
+            <div class="kpi-card">
+                <div class="kpi-icon blue">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="kpi-value" id="kpiSamples">--</div>
+                <div class="kpi-label">Total Samples</div>
+                <div class="kpi-trend up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Ready</span>
+                </div>
+            </div>
+            
+            <div class="kpi-card">
+                <div class="kpi-icon purple">
+                    <i class="fas fa-flask"></i>
+                </div>
+                <div class="kpi-value" id="kpiFeatures">--</div>
+                <div class="kpi-label">Features</div>
+                <div class="kpi-trend up">
+                    <i class="fas fa-arrow-up"></i>
+                    <span>Analyzed</span>
+                </div>
+            </div>
+            
+            <div class="kpi-card">
+                <div class="kpi-icon orange">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="kpi-value" id="kpiMissing">--</div>
+                <div class="kpi-label">Missing Values</div>
+                <div class="kpi-trend" id="kpiMissingTrend">
+                    <span>Checking...</span>
+                </div>
+            </div>
+            
+            <div class="kpi-card">
+                <div class="kpi-icon green">
+                    <i class="fas fa-seedling"></i>
+                </div>
+                <div class="kpi-value" id="kpiFertility">--</div>
+                <div class="kpi-label">Avg Fertility Score</div>
+                <div class="kpi-trend" id="kpiFertilityTrend">
+                    <span>Calculate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Explorer Section -->
+    <section class="section" id="explorer">
+        <div class="section-header">
+            <div class="section-label">Exploration</div>
+            <h2 class="section-title">Data Explorer</h2>
+            <p class="section-subtitle">Interactive exploration of your soil dataset</p>
+        </div>
+        
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" data-tab="preview">📋 Data Preview</button>
+                <button class="tab-btn" data-tab="distributions">📊 Distributions</button>
+                <button class="tab-btn" data-tab="correlations">🔗 Correlations</button>
+                <button class="tab-btn" data-tab="missing">🔍 Missing Values</button>
+            </div>
+            
+            <div class="tabs-content">
+                <div class="tab-panel active" id="preview">
+                    <div class="chart-container">
+                        <div class="chart-title">Dataset Preview</div>
+                        <div class="table-wrapper">
+                            <table class="data-table" id="previewTable">
+                                <thead></thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <div class="table-info" id="tableInfo"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-panel" id="distributions">
+                    <div class="chart-container">
+                        <div class="chart-title">Feature Distributions</div>
+                        <div class="feature-selector">
+                            <label>Select features to visualize:</label>
+                            <select id="distFeatureSelect" multiple></select>
+                        </div>
+                        <div class="charts-grid" id="distCharts"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-panel" id="correlations">
+                    <div class="chart-container">
+                        <div class="chart-title">Correlation Matrix</div>
+                        <div class="feature-selector">
+                            <label>Select features:</label>
+                            <select id="corrFeatureSelect" multiple></select>
+                        </div>
+                        <div class="heatmap-container" id="corrHeatmap"></div>
+                    </div>
+                </div>
+                
+                <div class="tab-panel" id="missing">
+                    <div class="chart-container">
+                        <div class="chart-title">Missing Values Analysis</div>
+                        <div id="missingChart"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Engineering Section -->
+    <section class="section" id="features">
+        <div class="section-header">
+            <div class="section-label">Engineering</div>
+            <h2 class="section-title">Feature Engineering</h2>
+            <p class="section-subtitle">Create powerful fertility indicators from raw soil data</p>
+        </div>
+        
+        <div class="feature-grid" id="featureGrid">
+            <!-- Feature cards will be generated by JS -->
+        </div>
+        
+        <div class="chart-container" id="engineeredPreview" style="display: none;">
+            <div class="chart-title">Engineered Features Preview</div>
+            <div class="table-wrapper">
+                <table class="data-table" id="engineeredTable">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clustering Section -->
+    <section class="section" id="clustering">
+        <div class="section-header">
+            <div class="section-label">Clustering</div>
+            <h2 class="section-title">Clustering Analysis</h2>
+            <p class="section-subtitle">Discover natural groupings in your soil profiles</p>
+        </div>
+        
+        <div class="clustering-controls">
+            <div class="control-group">
+                <label>Select features for clustering:</label>
+                <select id="clusterFeatures" multiple></select>
+            </div>
+            <div class="control-group">
+                <label>Number of clusters (K):</label>
+                <input type="range" id="clusterK" min="2" max="10" value="3">
+                <span id="clusterKValue">3</span>
+            </div>
+            <button class="btn btn-primary" id="runClustering">
+                <i class="fas fa-microscope"></i>
+                Run Clustering
+            </button>
+        </div>
+        
+        <div class="clustering-results" id="clusteringResults" style="display: none;">
+            <div class="charts-row">
+                <div class="chart-container">
+                    <div class="chart-title">Cluster Visualization (PCA)</div>
+                    <canvas id="clusterChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Cluster Summary</div>
+                    <div id="clusterSummary"></div>
+                </div>
+            </div>
+            
+            <div class="insights-list" id="clusterInsights"></div>
+        </div>
+    </section>
+
+    <!-- Modeling Section -->
+    <section class="section" id="modeling">
+        <div class="section-header">
+            <div class="section-label">Modeling</div>
+            <h2 class="section-title">Predictive Modeling</h2>
+            <p class="section-subtitle">Train and evaluate machine learning models for soil fertility prediction</p>
+        </div>
+        
+        <div class="modeling-controls">
+            <div class="control-row">
+                <div class="control-group">
+                    <label>Target variable:</label>
+                    <select id="targetSelect"></select>
+                </div>
+                <div class="control-group">
+                    <label>Features:</label>
+                    <select id="modelFeatures" multiple></select>
+                </div>
+            </div>
+            <div class="control-row">
+                <div class="control-group">
+                    <label>Test size (%):</label>
+                    <input type="range" id="testSize" min="10" max="50" value="20">
+                    <span id="testSizeValue">20%</span>
+                </div>
+                <div class="control-group">
+                    <label>Models:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" value="linear" checked> Linear Regression</label>
+                        <label><input type="checkbox" value="rf" checked> Random Forest</label>
+                    </div>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="trainModels">
+                <i class="fas fa-rocket"></i>
+                Train Models
+            </button>
+        </div>
+        
+        <div class="modeling-results" id="modelingResults" style="display: none;">
+            <div class="chart-container">
+                <div class="chart-title">Model Performance Comparison</div>
+                <div id="modelComparison"></div>
+            </div>
+            <div class="charts-row">
+                <div class="chart-container">
+                    <div class="chart-title">Predictions vs Actual</div>
+                    <canvas id="predictionChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Feature Importance</div>
+                    <canvas id="importanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Insights Section -->
+    <section class="section" id="insights">
+        <div class="section-header">
+            <div class="section-label">Intelligence</div>
+            <h2 class="section-title">Key Insights</h2>
+            <p class="section-subtitle">AI-generated insights from your soil data analysis</p>
+        </div>
+        
+        <div class="insights-list" id="insightsList">
+            <!-- Insights will be generated by JS -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>🌱 Soil Intelligence Platform · Advanced Analytics for Agriculture</p>
+        <p class="footer-sub">Built with HTML, CSS & JavaScript · Designed with Apple-inspired aesthetics</p>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/dataProcessor.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/ml.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

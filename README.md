@@ -1,61 +1,195 @@
-🌱 Soil Fertility Dashboard
-📖 Project Description
-This project delivers an interactive Streamlit dashboard for soil fertility evaluation.
-It integrates multiple soil datasets, applies feature engineering, and leverages machine learning models to generate insights that support soil health improvement and sustainability.
+# 🌱 Soil Intelligence Platform
 
-The goal is to solve a real challenge: predicting soil fertility accurately to help Tunisian farmers make better decisions about crop management, fertilization, and sustainability practices.
+A premium, Apple-inspired data science web application for soil fertility analysis, feature engineering, clustering, and predictive modeling. Built entirely with HTML, CSS, and JavaScript for static deployment on GitHub Pages.
 
-📊 Dataset Work
-Began with a small, incomplete horizon dataset that was insufficient for fertility prediction.
+![Soil Intelligence Platform](https://img.shields.io/badge/Platform-Web-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Deployment](https://img.shields.io/badge/Deploy-GitHub%20Pages-black)
 
-Integrated additional soil datasets through mapping and harmonization to build a unified, richer foundation.
+## ✨ Features
 
-Addressed missing values and inconsistencies to ensure reliability.
+### 📊 Data Exploration
+- **Interactive Data Preview** - Scrollable table with column type indicators
+- **Distribution Analysis** - Histograms for numeric features
+- **Correlation Heatmap** - Visual correlation matrix with color coding
+- **Missing Values Analysis** - Bar chart showing missing data by feature
 
-Engineered new features such as CN_ratio, Salinity_Index, and Fertility_Index to capture soil quality indicators.
+### 🔧 Feature Engineering
+- **Nitrogen Index** - TOTN / (TOTC + 1)
+- **Phosphorus Ratio** - P2O5 / (TOTN + 1)
+- **Potassium Balance** - K2O / (P2O5 + 1)
+- **Custom Fertility Score** - Mean of key nutrients
 
-This integration step was crucial to move from fragmented data to a national‑scale fertility evaluation resource.
+### 🎯 Clustering Analysis
+- **K-Means Clustering** - Client-side implementation
+- **PCA Visualization** - 2D scatter plot of clusters
+- **Interactive Controls** - Adjust number of clusters (K)
+- **Cluster Summary** - Size and percentage statistics
 
-⚙️ Preprocessing
-Applied data cleaning: imputation of missing values, normalization, and encoding of categorical variables.
+### 🤖 Predictive Modeling
+- **Linear Regression** - Normal equation implementation
+- **Random Forest** - Bootstrap aggregation with decision trees
+- **Model Comparison** - R² and RMSE metrics
+- **Feature Importance** - Horizontal bar chart
+- **Predictions vs Actual** - Scatter plot with perfect prediction line
 
-Conducted correlation analysis to identify the most relevant fertility drivers (carbon, nitrogen, phosphorus, pH).
+### 🧠 AI Insights
+- **Data Quality Assessment** - Missing value analysis
+- **Correlation Detection** - Strongest correlations identified
+- **Clustering Insights** - Natural groupings discovery
+- **Model Performance** - Best model recommendation
+- **Fertility Assessment** - Overall soil health score
 
-Reduced dimensionality by focusing on the most impactful features for modeling.
+## 🎨 Design Philosophy
 
-This ensured that the models were trained on meaningful, interpretable variables rather than noise.
+- **Apple-inspired aesthetics** - Clean, minimalist dark theme
+- **Glassmorphism effects** - Translucent cards with backdrop blur
+- **Smooth animations** - Gradient shifts, floating particles, fade-ins
+- **Responsive design** - Mobile-friendly layout
+- **Zero dependencies** - Pure HTML/CSS/JS with CDN libraries
 
-🤖 Modeling
-Implemented multiple models:
+## 🚀 Quick Start
 
-Random Forest & Gradient Boosting → captured non‑linear relationships, achieved >93% variance explained.
+### Local Development
 
-KNN → explored local similarity patterns, sensitive to outliers.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/soil-fertility-dashboard.git
+   cd soil-fertility-dashboard
+   ```
 
-Linear Regression → used as a transparent baseline.
+2. **Start a local server**
+   ```bash
+   # Python 3
+   python -m http.server 8000
+   
+   # Node.js
+   npx serve .
+   
+   # PHP
+   php -S localhost:8000
+   ```
 
-Hyperparameters tuned for balance between accuracy and generalization.
+3. **Open in browser**
+   ```
+   http://localhost:8000
+   ```
 
-Evaluation metrics: R², RMSE, and residual analysis confirmed unbiased, robust predictions.
+### GitHub Pages Deployment
 
-This modeling pipeline transformed raw soil data into actionable fertility predictions.
+1. **Fork this repository**
 
-📈 Analysis & Real‑World Impact
-Ensemble models provided the most accurate predictions.
+2. **Enable GitHub Pages**
+   - Go to Settings → Pages
+   - Select source: Deploy from a branch
+   - Choose branch: `main`
+   - Folder: `/ (root)`
 
-Feature importance highlighted carbon and nitrogen as key fertility drivers, with phosphorus showing a negative correlation.
+3. **Your site will be live at**
+   ```
+   https://yourusername.github.io/soil-fertility-dashboard/
+   ```
 
-Clustering (K‑Means) segmented soils into fertility categories, complementing rule‑based classification.
+## 📁 Project Structure
 
-🌍 Application in Tunisia
-Farmers can use the dashboard to upload their soil test results and receive fertility predictions.
+```
+soil-fertility-dashboard/
+├── index.html              # Main application
+├── css/
+│   └── style.css           # Apple-inspired dark theme
+├── js/
+│   ├── app.js              # Main application controller
+│   ├── dataProcessor.js    # Data parsing & statistics
+│   ├── charts.js           # Chart.js configurations
+│   └── ml.js               # ML algorithms (K-means, regression)
+├── data/
+│   └── soil_data.json      # Sample dataset
+└── README.md               # Documentation
+```
 
-The system provides recommendations on soil management, helping optimize fertilizer use and reduce costs.
+## 📊 Dataset Format
 
-By identifying fertility drivers, the tool supports sustainable practices that improve soil health and reduce environmental impact.
+The application accepts:
+- **CSV files** - Comma-separated values
+- **Excel files** - .xlsx or .xls format
 
-This bridges the gap between academic soil science and real agricultural decision‑making in Tunisia.
+Expected columns for full functionality:
+- `TOTC` - Total Carbon
+- `TOTN` - Total Nitrogen
+- `P2O5` - Phosphorus
+- `K2O` - Potassium
+- `PHAQ` - pH Level
 
-🎯 Conclusion
-This project successfully transformed incomplete horizon data into a robust fertility prediction pipeline.
-It achieved the goal of delivering accurate predictions and actionable insights, supporting farmers in Tunisia to improve soil health, optimize resources, and move toward sustainable agriculture.
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| HTML5 | Structure |
+| CSS3 | Styling & animations |
+| JavaScript (ES6+) | Logic & interactivity |
+| Chart.js | Data visualizations |
+| SheetJS | Excel file parsing |
+| PapaParse | CSV file parsing |
+| simple-statistics | Statistical functions |
+
+## 🧮 Machine Learning
+
+All ML algorithms are implemented in pure JavaScript:
+
+- **K-Means Clustering** - Lloyd's algorithm with k-means++ initialization
+- **Principal Component Analysis** - Power iteration for eigenvectors
+- **Linear Regression** - Normal equation with Gaussian elimination
+- **Random Forest** - Bootstrap aggregation with CART decision trees
+- **Feature Importance** - Permutation importance approximation
+
+## 🎨 Customization
+
+### Colors
+Edit CSS custom properties in `css/style.css`:
+```css
+:root {
+    --accent-blue: #0071e3;
+    --accent-purple: #af52de;
+    --accent-green: #30d158;
+    --accent-orange: #ff9f0a;
+}
+```
+
+### Charts
+Modify chart configurations in `js/charts.js`:
+```javascript
+this.colors = {
+    primary: '#0071e3',
+    // ...
+};
+```
+
+## 📱 Browser Support
+
+- Chrome 90+
+- Firefox 88+
+- Safari 14+
+- Edge 90+
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- Apple Design Resources for inspiration
+- Chart.js team for visualization library
+- SheetJS team for Excel parsing
+- Soil science community for domain knowledge
+
+---
+
+Built with ❤️ for agronomists, researchers, and ML engineers.
