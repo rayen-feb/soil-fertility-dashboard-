@@ -33,6 +33,12 @@ class SoilApp {
             this.loadSampleData();
         });
 
+        // Load full dataset button
+        document.getElementById('loadFullBtn').addEventListener('click', () => {
+            this.loadFullDataset();
+        });
+
+
         // Clustering controls
         document.getElementById('clusterK').addEventListener('input', (e) => {
             document.getElementById('clusterKValue').textContent = e.target.value;
@@ -182,6 +188,25 @@ class SoilApp {
             this.showLoading(false);
         }
     }
+
+    /**
+     * Load full Unified Soil Dataset
+     */
+    async loadFullDataset() {
+        this.showLoading(true);
+        
+        try {
+            await dataProcessor.loadFullDataset();
+            this.onDataLoaded();
+            this.showUploadStatus(`✅ Loaded full dataset: ${dataProcessor.data.length} rows and ${dataProcessor.columns.length} features`, 'success');
+        } catch (error) {
+            console.error('Error loading full dataset:', error);
+            this.showUploadStatus(`❌ Error: ${error.message}. Try using a local server (python -m http.server 8000)`, 'error');
+        } finally {
+            this.showLoading(false);
+        }
+    }
+
 
     /**
      * Callback when data is loaded

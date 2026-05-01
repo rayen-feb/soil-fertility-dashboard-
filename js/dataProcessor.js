@@ -77,6 +77,30 @@ class DataProcessor {
     }
 
     /**
+     * Load full Unified Soil Dataset from JSON
+     */
+    async loadFullDataset() {
+        try {
+            const response = await fetch('data/soil_data_full.json');
+            const jsonData = await response.json();
+            this.data = jsonData.data.map(row => {
+                // Convert empty strings back to null
+                const newRow = {};
+                for (const [key, value] of Object.entries(row)) {
+                    newRow[key] = value === '' ? null : value;
+                }
+                return newRow;
+            });
+            this.analyzeColumns();
+            return this.data;
+        } catch (error) {
+            console.error('Error loading full dataset:', error);
+            throw error;
+        }
+    }
+
+
+    /**
      * Analyze columns and classify them
      */
     analyzeColumns() {
