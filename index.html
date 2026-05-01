@@ -43,7 +43,9 @@
                 <li><a href="#clustering" class="nav-link">Clustering</a></li>
                 <li><a href="#modeling" class="nav-link">Modeling</a></li>
                 <li><a href="#insights" class="nav-link">Insights</a></li>
+                <li><a href="#predictor" class="nav-link">Predictor</a></li>
             </ul>
+
             <button class="mobile-menu-btn" id="mobileMenuBtn">
                 <i class="fas fa-bars"></i>
             </button>
@@ -374,11 +376,110 @@
         </div>
     </section>
 
+    <!-- Farmer's Soil Predictor Section -->
+    <section class="section" id="predictor">
+        <div class="section-header">
+            <div class="section-label">Farmer's Tool</div>
+            <h2 class="section-title">Predict Your Soil Fertility</h2>
+            <p class="section-subtitle">Enter your soil test results and get instant fertility analysis with recommendations</p>
+        </div>
+        
+        <div class="predictor-container" style="max-width: 800px; margin: 0 auto;">
+            <div class="predictor-form" style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 2rem;">
+                
+                <!-- Category Selection -->
+                <div style="margin-bottom: 2rem; text-align: center;">
+                    <label style="display: block; color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin-bottom: 1rem;">What do you want to grow?</label>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="category-btn active" data-category="trees" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-xl); border: 2px solid var(--accent-green); background: rgba(48, 209, 88, 0.15); color: var(--accent-green); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">
+                            🌳 Trees
+                        </button>
+                        <button class="category-btn" data-category="plants" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-xl); border: 2px solid var(--border-color); background: transparent; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">
+                            🌿 Plants
+                        </button>
+                        <button class="category-btn" data-category="vegetables" style="padding: 0.75rem 1.5rem; border-radius: var(--radius-xl); border: 2px solid var(--border-color); background: transparent; color: var(--text-secondary); font-weight: 600; cursor: pointer; transition: all 0.3s; font-family: inherit;">
+                            🥕 Vegetables
+                        </button>
+                    </div>
+                </div>
+
+                <div class="control-row">
+
+                    <div class="control-group">
+                        <label>Total Carbon (TOTC) %</label>
+                        <input type="number" id="predTOTC" step="0.01" placeholder="e.g., 2.5" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                    <div class="control-group">
+                        <label>Total Nitrogen (TOTN) %</label>
+                        <input type="number" id="predTOTN" step="0.01" placeholder="e.g., 0.15" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                </div>
+                <div class="control-row">
+                    <div class="control-group">
+                        <label>Phosphorus (P2O5) mg/kg</label>
+                        <input type="number" id="predP2O5" step="0.1" placeholder="e.g., 45.2" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                    <div class="control-group">
+                        <label>Potassium (K2O) mg/kg</label>
+                        <input type="number" id="predK2O" step="0.1" placeholder="e.g., 180.5" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                </div>
+                <div class="control-row">
+                    <div class="control-group">
+                        <label>pH Level (PHAQ)</label>
+                        <input type="number" id="predPHAQ" step="0.1" min="0" max="14" placeholder="e.g., 6.5" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                    <div class="control-group">
+                        <label>Soil Depth (HBDE) cm</label>
+                        <input type="number" id="predHBDE" step="1" placeholder="e.g., 30" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                </div>
+                <div class="control-row">
+                    <div class="control-group">
+                        <label>Electrical Conductivity (ELCO) dS/m</label>
+                        <input type="number" id="predELCO" step="0.01" placeholder="e.g., 1.2" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                    <div class="control-group">
+                        <label>Gypsum Content (GYPS) %</label>
+                        <input type="number" id="predGYPS" step="0.01" placeholder="e.g., 0.5" style="width: 100%; padding: 0.75rem; background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-family: inherit;">
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" id="predictFertilityBtn" style="width: 100%; margin-top: 1.5rem;">
+                    <i class="fas fa-magic"></i>
+                    Predict Soil Fertility
+                </button>
+            </div>
+            
+            <div id="predictionResult" class="hidden" style="margin-top: 2rem;">
+                <!-- Fertility Score Card -->
+                <div class="kpi-card" style="text-align: center; border: 2px solid var(--accent-blue); margin-bottom: 2rem;">
+                    <div class="kpi-value" id="predScore" style="font-size: 4rem; background: linear-gradient(135deg, #0071e3, #af52de); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">--</div>
+                    <div class="kpi-label" style="font-size: 1.2rem; margin-top: 0.5rem;">Fertility Score</div>
+                    <div id="predCategory" style="font-size: 1.5rem; font-weight: 700; margin-top: 1rem; color: var(--accent-green);">--</div>
+                </div>
+                
+                <!-- Soil Recommendations -->
+                <div class="insights-list" id="predRecommendations" style="margin-top: 1.5rem;"></div>
+                
+                <!-- Crop Recommendations -->
+                <div style="margin-top: 2rem;">
+                    <h3 style="text-align: center; color: var(--text-primary); font-size: 1.5rem; margin-bottom: 1.5rem;">
+                        <span id="cropCategoryTitle">🌳 Best Trees for Your Soil</span>
+                    </h3>
+                    <div id="cropRecommendations" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem;"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <p>🌱 Soil Intelligence Platform · Advanced Analytics for Agriculture</p>
         <p class="footer-sub">Built with HTML, CSS & JavaScript · Designed with Apple-inspired aesthetics</p>
     </footer>
+
 
     <!-- Loading Overlay -->
     <div class="loading-overlay hidden" id="loadingOverlay">
