@@ -14,7 +14,8 @@ class SoilApp {
     }
 
     initCropDB() {
-        const unsplash = (id) => `https://images.unsplash.com/photo-${id}?w=400&h=300&fit=crop`;
+        const unsplash = (id) => `https://picsum.photos/seed/${id}/400/300`;
+
         return {
             trees: [
                 {name:'Olive',img:unsplash('1591857177580-dc82b9e4e11c'),pH:[7,8],totc:[1,5],elco:[0,4],sal:'tolerant',desc:'Tolerates alkaline, clay-rich soils. Great for semi-arid regions.'},
@@ -673,13 +674,16 @@ calculateCropRecommendations(soilData) {
             const card = document.createElement('div');
             card.style.cssText = 'background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); overflow: hidden; transition: all 0.3s; animation: fadeInUp 0.5s ease forwards; animation-delay: ' + (idx * 0.1) + 's; opacity: 0;';
             card.innerHTML = `
-                <div style="position: relative; height: 160px; overflow: hidden;">
-                    <img src="${crop.img}" alt="${crop.n}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    <div style="position: absolute; top: 10px; right: 10px; background: ${crop.score >= 70 ? '#30d158' : crop.score >= 40 ? '#ff9f0a' : '#ff453a'}; color: white; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.9rem;">${crop.score}%</div>
+                <div style="position: relative; height: 160px; overflow: hidden; background: linear-gradient(135deg, rgba(0,113,227,0.15), rgba(175,82,222,0.15)); display: flex; align-items: center; justify-content: center;">
+                    <img src="${crop.img}" alt="${crop.name}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; z-index: 1;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none'">
+                    <div style="font-size: 3rem;">🌱</div>
+                    <div style="position: absolute; top: 10px; right: 10px; background: ${crop.score >= 70 ? '#30d158' : crop.score >= 40 ? '#ff9f0a' : '#ff453a'}; color: white; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; z-index: 2;">${crop.score}%</div>
                 </div>
+
                 <div style="padding: 1rem;">
-                    <h4 style="margin: 0 0 0.5rem 0; color: var(--text-primary); font-size: 1.1rem;">${crop.n}</h4>
-                    <p style="margin: 0 0 0.75rem 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.4;">${crop.d}</p>
+                    <h4 style="margin: 0 0 0.5rem 0; color: var(--text-primary); font-size: 1.1rem;">${crop.name}</h4>
+                    <p style="margin: 0 0 0.75rem 0; color: var(--text-secondary); font-size: 0.85rem; line-height: 1.4;">${crop.desc}</p>
+
                     <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
                         ${crop.reasons.map(r => `<span style="background: rgba(48, 209, 88, 0.15); color: #30d158; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">${r}</span>`).join('')}
                         ${crop.warnings.map(w => `<span style="background: rgba(255, 69, 58, 0.15); color: #ff453a; padding: 2px 8px; border-radius: 4px; font-size: 0.75rem;">${w}</span>`).join('')}

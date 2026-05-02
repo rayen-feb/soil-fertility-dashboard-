@@ -1,37 +1,20 @@
-# Soil Fertility Dashboard - Transformation Plan
+# Image Verification & Fixes - TODO
 
-## Task: Transform to Premium Apple-Style Data Science Web Application
+## Issues Found
+- [x] Bug: `crop.n` is undefined (should be `crop.name`) in image alt text
+- [x] Bug: `crop.d` is undefined (should be `crop.desc`) in description text
+- [x] Missing error handling for broken external images
+- [x] No placeholder/fallback when images fail to load
+- [x] Unsplash photo IDs returning 404 errors
 
----
+## Fixes Applied
+- [x] Fixed alt text bug: `crop.n` → `crop.name`
+- [x] Fixed description bug: `crop.d` → `crop.desc`
+- [x] Added image error handling with `onerror` attribute
+- [x] Added gradient background + 🌱 emoji placeholder for broken images
+- [x] Replaced broken Unsplash URLs with reliable picsum.photos seed-based URLs
 
-### Status: IN PROGRESS
-
-**Phase 1: UI Redesign**
-- [ ] 1. Create Apple-style CSS design system
-- [ ] 2. Implement top navigation bar
-- [ ] 3. Build Hero section
-- [ ] 4. Create KPI glass cards
-
-**Phase 2: Core Features**
-- [ ] 5. Data Explorer with interactive tables
-- [ ] 6. Missing value visualization
-- [ ] 7. Feature Engineering section
-- [ ] 8. Clustering analysis with PCA
-
-**Phase 3: ML Pipeline**
-- [ ] 9. Model training interface
-- [ ] 10. Model evaluation cards
-- [ ] 11. Insights generation
-
-**Phase 4: Deployment**
-- [ ] 12. Streamlit config
-- [ ] 13. Test application
-- [ ] 14. Prepare for GitHub
-
----
-
-### Files Created/Modified:
-- soil_dashboard.py (main app)
-- requirements.txt
-- .streamlit/config.toml
-- TODO.md (this file)
+## Verification
+- [x] Tested picsum.photos URLs return 200 OK
+- [x] Tested placehold.co as fallback option (200 OK)
+- [x] Confirmed all image links are now valid
