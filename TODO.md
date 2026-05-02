@@ -1,20 +1,16 @@
-# Image Verification & Fixes - TODO
+# Image Display Fix - TODO
 
-## Issues Found
-- [x] Bug: `crop.n` is undefined (should be `crop.name`) in image alt text
-- [x] Bug: `crop.d` is undefined (should be `crop.desc`) in description text
-- [x] Missing error handling for broken external images
-- [x] No placeholder/fallback when images fail to load
-- [x] Unsplash photo IDs returning 404 errors
+## Root Cause
+- `js/app.js` uses external `picsum.photos` URLs for crop recommendation card images.
+- These fail when offline, blocked by network policies, or when the service is unreachable.
+- The `onerror="this.style.display='none'"` handler hides broken images, leaving empty space.
 
-## Fixes Applied
-- [x] Fixed alt text bug: `crop.n` → `crop.name`
-- [x] Fixed description bug: `crop.d` → `crop.desc`
-- [x] Added image error handling with `onerror` attribute
-- [x] Added gradient background + 🌱 emoji placeholder for broken images
-- [x] Replaced broken Unsplash URLs with reliable picsum.photos seed-based URLs
+## Fix Plan
+- [ ] Replace `unsplash()` function with `generatePlaceholder(name, seed)` that returns inline SVG data URIs.
+- [ ] Each SVG will have a unique gradient background and display the crop name for visual identification.
+- [ ] Update `initCropDB()` to use the new generator — no external network dependency.
+- [ ] Verify crop recommendation cards render placeholders reliably in the Predictor section.
 
 ## Verification
-- [x] Tested picsum.photos URLs return 200 OK
-- [x] Tested placehold.co as fallback option (200 OK)
-- [x] Confirmed all image links are now valid
+- [ ] Open `index.html` → Predictor → enter values → click Predict Soil Fertility.
+- [ ] Confirm top 6 crop cards show colorful SVG placeholders with crop names.
